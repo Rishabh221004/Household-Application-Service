@@ -1,0 +1,70 @@
+{% extends "customerBase.html" %}
+
+
+{% block content %}
+
+<div class="container mt-5">
+  <h1 class="text-center">Services</h1>
+  <div class="row">
+    {% for service in services %}
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">{{ service.serviceName }}</h5>
+          <p class="card-text">{{ service.serviceDescription }}</p>
+          <a href="/customerDashboard/createRequest/{{ service.id }}" class="btn btn-primary">Create New Request</a>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+<div class="container mt-5">
+  <h1 class="text-center">Service History</h1>
+  {% if serviceHistory %}
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Service Name</th>
+        <th scope="col">Description</th>
+        <th scope="col">Professional Name</th>
+        <th scope="col">Request Type</th>
+        <th scope="col">Status</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for request in serviceHistory %}
+      <tr>
+        <td>{{ request.service.serviceName }}</td>
+        <td>{{ request.description }}</td>
+        <td>{{ request.professional.username }}</td>
+        <td>{{ request.reqType }}</td>
+        <td>{{ request.status }}</td>
+        {% if request.status == 'accepted' %}
+        <td><a href="/customerDashboard/closeRequest/{{request.id}}" class="btn btn-success">Close Request</a></tr>
+        {% elif request.status == 'rejected' %}  
+        <td></td>
+        {% elif request.status == 'closed' %}
+        <td></td>
+        {% else %}
+        <td><a href="/customerDashboard/editRequest/{{request.id}}" class="btn btn-warning">Edit Request</a>
+            <a href="/customerDashboard/deleteRequest/{{request.id}}" class="btn btn-danger">Delete Request</a></td>  
+        {% endif %}
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+  <p class="text-center">No service history yet.</p>
+  {% endif %}
+</div>
+
+{% endblock %}
+
+
+
+
+    
+

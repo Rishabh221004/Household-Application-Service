@@ -1,0 +1,39 @@
+{% extends "adminBase.html" %}
+
+{% block content %}
+
+<div class="container mt-5">
+    <h1 class="text-center">Professional Profile</h1>
+    <div class="row">
+      <div class="col-md-6">
+        <h2>Professional Information</h2>
+        <p><strong>Username:</strong> {{ professional.username }}</p>
+        <p><strong>Email:</strong> {{ professional.email }}</p>
+        <p><strong>Address:</strong> {{ professional.address }}</p>
+        <p><strong>Pincode:</strong> {{ professional.pincode }}</p>
+      </div>
+      <div class="col-md-6">
+        <h2>Service Information</h2>
+        <p><strong>Service:</strong> {{ professional.service.serviceName }}</p>
+        <p><strong>Service Description:</strong> {{ professional.service.serviceDescription }}</p>
+        <p><strong>Base Price:</strong> {{ professional.service.basePrice }}</p>
+        <p><strong>Time Required:</strong> {{ professional.service.timeRequired }}</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <h2>Professional Experience</h2>
+        <p>{{ professional.professionalExperience }}</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <h2>Professional File</h2>
+        <a href="/static/pdfs/{{ professional.professionalPdf }}">Download Professional File</a>
+      </div>
+    </div>
+  </div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+{% endblock %}

@@ -1,0 +1,118 @@
+{% extends "adminBase.html" %}
+
+
+
+{% block content %}
+
+
+
+<div class="container mt-5">
+    <h1 class="text-center">Admin Search</h1>
+    <form action="/adminDashboard/search" method="GET">
+      <div class="form-row" align="center">
+        <div class="col-md-3" style="display: inline-block;">
+          <select class="form-control" name="searchType" id="searchType">
+            <option value="user">User</option>
+            <option value="service">Service</option>
+          </select>
+        </div>
+        <div class="col-md-5" style="display: inline-block;">
+          <input type="text" class="form-control" name="searchQuery" id="search" placeholder="Enter query">
+        </div>
+        <div class="col-md-2" style="display: inline-block;">
+          <button type="submit" class="btn btn-primary">Search</button>
+        </div>
+      </div>
+    </form>
+    <a href="/adminDashboard/search"><button class="btn btn-warning">Reset</button></a>
+</div>
+
+
+
+  {% if users %}
+  <h3>Users</h3>
+  <ul class="list-group mb-3">
+    {% for user in users %}
+    <li class="list-group-item">{{ user.username }}</li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+
+  
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Username</th>
+        <th scope="col">Email</th>
+        
+        <th scope="col">Address</th>
+        <th scope="col">Pincode</th>
+        <th scope="col">Is Admin</th>
+        <th scope="col">Is Professional</th>
+        <th scope="col">Is Customer</th>
+        <th scope="col">Is Approved</th>
+        <th scope="col">Is Flagged</th>
+        <th scope="col">Average Rating</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for user in users %}
+      <tr>
+        <td>{{ user.username }}</td>
+        <td>{{ user.email }}</td>
+        
+        <td>{{ user.address }}</td>
+        <td>{{ user.pincode }}</td>
+        <td>{{ user.isAdmin }}</td>
+        <td>{{ user.isProfessional }}</td>
+        <td>{{ user.isCustomer }}</td>
+        <td>{{ user.isApproved }}</td>
+        <td>{{ user.isFlagged  }}</td>
+        {% if user.isProfessional==True %}
+        <td>{{ user.averageRating  }}</td>
+        {% endif %}
+        {% if user.isProfessional and user.isFlagged==False %}
+        <td><a href="/adminDashboard/blockProfessional/{{ user.id }}" class="btn btn-danger">Block</a></td>
+        {% elif user.isProfessional and user.isFlagged==True %}
+        <td><a href="/adminDashboard/unblockProfessional/{{ user.id }}" class="btn btn-success">Unblock</a></td>
+        {% else %}
+        <td></td>
+        {% endif %}
+       
+        
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% if services %}
+<h3>Services</h3>
+<ul class="list-group">
+  {% for service in services %}
+  <li class="list-group-item">{{ service.serviceName }}</li>
+  {% endfor %}
+</ul>
+
+<table class="table mt-3">
+  <thead>
+    <tr>
+      <th scope="col">Service Name</th>
+      <th scope="col">Service Description</th>
+      <th scope="col">Base Price</th>
+      <th scope="col">Time Required</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for service in services %}
+    <tr>
+      <td>{{ service.serviceName }}</td>
+      <td>{{ service.serviceDescription }}</td>
+      <td>{{ service.basePrice }}</td>
+      <td>{{ service.timeRequired }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endif %}
+
+{% endblock %}

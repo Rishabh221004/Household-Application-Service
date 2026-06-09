@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Household Application-Admin Dashboard</title>
+    <title>Household Application-Customer Dashboard</title>
 
     <link rel="stylesheet" href="/static/css/style.css">
     
@@ -12,22 +12,23 @@
     
 </head>
 <body>
+
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
-          <a class="navbar-brand" href="#">Admin Dashboard</a>
+          <a class="navbar-brand" href="#">{{ customerName }}</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
-          <div class="collapse navbar-collapse" id="navbarNavDropdown"  >
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav ms-auto">
               <li class="nav-item">
-                <a class="nav-link " href="/adminDashboard">Home</a>
+                <a class="nav-link" href="/customerDashboard">Home</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="/adminDashboard/search">Search</a>
+                <a class="nav-link" href="/customerDashboard/search">Search</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="/adminDashboard/summary">Summary</a>
+                <a class="nav-link" href="/customerDashboard/summary">Summary</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="/logout">Logout</a>
@@ -36,6 +37,7 @@
           </div>
         </div>
       </nav>
+    
       
     <div class="container">
         {% with messages = get_flashed_messages(with_categories=true) %}

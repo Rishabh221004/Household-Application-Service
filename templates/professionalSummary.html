@@ -1,0 +1,35 @@
+{% extends "professionalBase.html" %}
+
+
+
+{% block content %}
+
+
+
+
+
+<div class="container mt-5 text-center">
+    <h2 class="text-center">Summary</h2>
+    <div class="row justify-content-center">
+        
+        <div class="col-md-6 text-center">
+            <h4>Number of Requests by Status</h4>
+            <img src="{{url_for('static', filename='images/img3.png')}}" class="img-fluid">
+        </div>
+    </div>
+    <div class="row mt-3 justify-content-center">
+       
+        <div class="col-md-6 text-center">
+            <h4>Number of Requests</h4>
+            <ul class="list-group">
+                <li class="list-group-item">Accepted: {{acceptedCount}}</li>
+                <li class="list-group-item">Pending: {{pendingCount}}</li>
+                <li class="list-group-item">Closed: {{closedCount}}</li>
+                <li class="list-group-item">Rejected: {{rejectedCount}}</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

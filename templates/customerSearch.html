@@ -1,0 +1,103 @@
+{% extends "customerBase.html" %}
+{% block content %}
+
+
+<div class="container mt-5">
+    <h1 class="text-center">Customer Search</h1>
+    <form action="/customerDashboard/search" method="GET">
+      
+
+      <div class="form-row" align="center">
+        <div class="col-md-3" style="display: inline-block;">
+          <select class="form-control" name="searchType" id="searchType">
+            <option value="pincode">Pincode</option>
+            <option value="serviceName">Service Name</option>
+            <option value="address">Address</option>
+          </select>
+        </div>
+        <div class="col-md-5" style="display: inline-block;">
+          <input type="text" class="form-control" name="searchQuery" id="search" placeholder="Search for a service">
+        </div>
+        <div class="col-md-2" style="display: inline-block;">
+          <button type="submit" class="btn btn-primary">Search</button>
+        </div>
+      </div>
+    </form>
+    <a href="/customerDashboard/search" ><button class="btn btn-warning">Reset</button></a>
+</div>
+
+<hr>
+
+{% if services %}
+<div class="container">
+    <h2> All Services </h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th class="scope col">Service Name</th>
+                <th class="scope col">Service Description</th>
+                <th class="scope col">Base Price</th>
+                <th class="scope col">Time Required</th>
+                <th class="scope col">Professional name</th>
+                <th class="scope col">Professional Rating</th>
+                <th class="scope col">View Profile</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for service in services %}
+            <tr>
+                <td>{{ service.serviceName }}</td>
+
+                <td>{{ service.serviceDescription }}</td>
+                
+
+                <td>{{ service.basePrice }}</td>
+                
+
+                <td>{{ service.timeRequired }}</td>
+                
+
+                <td>
+                    {% for professional in service.professionals %}
+                        {{ professional.username }}<br>
+                    {% endfor %}
+                </td>
+
+                <td>
+                    {% for professional in service.professionals %}
+                        {{ professional.averageRating }}<br>
+                    {% endfor %}
+                </td>
+
+                <td>
+                    {% for professional in service.professionals %}
+                        <a href="/customerDashboard/professionalProfile/{{ professional.id }}">View Profile</a><br>
+                    {% endfor %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% else %}
+<div class="container">
+    <h2>No services found</h2>
+    <p>Sorry, no services match your search criteria.</p>
+  </div>
+{% endif %}
+    
+        
+ 
+    
+
+
+
+
+
+{% endblock %}
+
+
+
+
+    
+

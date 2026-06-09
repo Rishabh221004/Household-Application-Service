@@ -1,0 +1,43 @@
+{% extends "customerBase.html" %}
+
+
+
+{% block content %}
+
+<!-- Rating and Review Form Section -->
+<div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-6 text-center">
+        <h2>Rate and Review {{ service }} by {{ professional }}</h2>
+        <form method="POST">
+          <div class="form-group text-center">
+            <label for="rating">Rating:</label>
+            <select class="form-control" id="rating" name="rating">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select>
+          </div>
+          <div class="form-group text-center">
+            <label for="review">Review:</label>
+            <textarea class="form-control" id="review" name="review" rows="3"></textarea><br>
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+      
+    
+  
+  
+
+{% endblock %}
+
+
+
+
+    
+

@@ -1,0 +1,99 @@
+{% extends "adminBase.html" %}
+
+{% block content %}
+
+<div class="container mt-5">
+    <h1 class="text-center">Services</h1>
+    {% if services %}
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Service Name</th>
+          <th scope="col">Service Description</th>
+          <th scope="col">Base Price</th>
+          <th scope="col">Time Required</th>
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for service in services %}
+        <tr>
+          <td>{{ service.serviceName }}</td>
+          <td>{{ service.serviceDescription }}</td>
+          <td>{{ service.basePrice }}</td>
+          <td>{{ service.timeRequired }}</td>
+          <td>
+            <a href="/adminDashboard/editService/{{ service.id }}" class="btn btn-primary">Edit</a>
+            <a href="/adminDashboard/deleteService/{{ service.id }}" class="btn btn-danger">Delete</a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <a href="/adminDashboard/createService" class="btn btn-success">Create New Service</a>
+    {% else %}
+    <p class="text-center">No services available</p>
+    <a href="/adminDashboard/createService" class="btn btn-success">Create New Service</a>
+    {% endif %}
+  </div>
+  
+  <div class="container mt-5">
+    <h1 class="text-center">Unapproved Professionals</h1>
+    {% if unapprovedProfessionals %}
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>UserID</th>
+          <th>Username</th>
+          <th>Profile</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for professional in unapprovedProfessionals %}
+        <tr>
+          <td>{{ professional.id }}</td>
+          <td>{{ professional.username }}</td>
+          <td><a class="text-body" href ="/adminDashboard/viewProfessional/{{ professional.id }}">Profile</a></td>
+          <td>
+            <a href="/adminDashboard/approveProfessional/{{ professional.id }}" class="btn btn-primary">Approve</a>
+            <a href="/adminDashboard/rejectProfessional/{{ professional.id }}" class="btn btn-danger">Reject</a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% else %}
+    <p class="text-center">No unapproved professional available</p>
+    {% endif %}
+  </div>
+  
+  <div class="container mt-5">
+    <h1 class="text-center">Requests</h1>
+    {% if requests %}
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Professional</th>
+          <th scope="col">Requested Date</th>
+          <th scope="col">Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for request in requests %}
+        <tr>
+          <td>{{ request.id }}</td>
+          <td><a href ="/adminDashboard/viewProfessional/{{ request.professionalId }}">{{ request.professional.username }}</a></td>  
+          <td>{{ request.dateCreated }}</td>
+          <td>{{ request.status }}</td>  
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% else %}
+    <p class="text-center">No requests available</p>
+    {% endif %}
+  </div>
+
+{% endblock %}

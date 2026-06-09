@@ -1,0 +1,106 @@
+{% extends "professionalBase.html" %}
+
+
+
+{% block content %}
+
+<!-- Pending Requests Table -->
+<div class="container mt-5">
+  <h1 class="text-center">Pending Requests</h1>
+  {% if pendingRequests %}
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Customer Name</th>
+        <th>Pincode</th>
+        <th>Address</th>
+        <th>Service Name</th>
+        <th>Description</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for request in pendingRequests %}
+      <tr>
+        <td>{{ request.customer.username }}</td>
+        <td>{{ request.customer.pincode }}</td>
+        <td>{{ request.customer.address }}</td>
+        <td>{{ request.service.serviceName }}</td>
+        <td>{{ request.description}}</td>
+        <td>
+          <a href="/professionalDashboard/acceptRequest/{{request.id}}" class="btn btn-success">Accept</a>
+          <a href="/professionalDashboard/rejectRequest/{{request.id}}" class="btn btn-danger">Reject</a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+  <p class="text-center">No pending requests</p>
+  {% endif %}
+</div>
+
+<!-- Accepted Requests Table -->
+<div class="container mt-5">
+  <h1 class="text-center">Accepted Requests</h1>
+  {% if acceptedRequests %}
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Customer Name</th>
+        <th>Pincode</th>
+        <th>Address</th>
+        <th>Service Name</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for request in acceptedRequests %}
+      <tr>
+        <td>{{ request.customer.username }}</td>
+        <td>{{ request.customer.pincode }}</td>
+        <td>{{ request.customer.address }}</td>
+        <td>{{ request.service.serviceName }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+  <p class="text-center">No accepted requests</p>
+  {% endif %}
+</div>
+
+<!-- Closed Requests Table -->
+<div class="container mt-5">
+  <h1 class="text-center">Closed Requests</h1>
+  {% if closedRequests %}
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Customer Name</th>
+        <th>Pincode</th>
+        <th>Address</th>
+        <th>Service Name</th>
+        <th>Review</th>
+        <th>Rating</th>
+
+      </tr>
+    </thead>
+    <tbody>
+      {% for request in closedRequests %}
+      <tr>
+        <td>{{ request.customer.username }}</td>
+        <td>{{ request.customer.pincode }}</td>
+        <td>{{ request.customer.address }}</td>
+        <td>{{ request.service.serviceName }}</td>
+        <td>{{ request.reviewByCustomer }}</td>
+        <td>{{ request.ratingByCustomer }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+  <p class="text-center">No requests completed yet</p>
+  {% endif %}
+</div>
+
+{% endblock %}

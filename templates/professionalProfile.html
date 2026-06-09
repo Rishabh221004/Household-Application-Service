@@ -1,0 +1,83 @@
+{% extends "customerBase.html" %}
+
+
+
+{% block content %}
+
+
+
+
+<!-- professional_profile.html -->
+
+<!-- Header Section -->
+<div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h1>Professional Profile</h1>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Profile Information Section -->
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <h2>Profile Information</h2>
+        <p>Name: {{ newProfessional.username }}</p>
+        <p>Email: {{ newProfessional.email }}</p>
+        <p>Address: {{ newProfessional.address }}</p>
+        <p>Pincode: {{ newProfessional.pincode }}</p>
+      </div>
+      <div class="col-md-6">
+        <h2>Professional Information</h2>
+        <p>Professional File: {{ newProfessional.professionalPdf }}</p>
+        <p>Professional Experience: {{ newProfessional.professionalExperience }}</p>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Rating and Reviews Section -->
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h2>Rating and Reviews</h2>
+        <p>Average Rating: {{ newProfessional.averageRating }}</p>
+        <p>Rating Count: {{ newProfessional.ratingCount }}</p>
+        <h3>Reviews:</h3>
+        <ul>
+          {% for review in reviews %}
+            <li>
+              <p>Rating: {{ review.ratingByCustomer }}</p>
+              <p>Review: {{ review.reviewByCustomer }}</p>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Service Requests Section -->
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h2>Service Requests</h2>
+        <ul>
+          {% for request in newProfessional.professionalRequests %}
+            <li>
+              <p>Service: {{ request.service.serviceName }}</p>
+              <p>Status: {{ request.status }}</p>
+              <p>Date Created: {{ request.dateCreated }}</p>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+  
+   
+
+
+   
+{% endblock %}
